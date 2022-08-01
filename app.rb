@@ -2,6 +2,10 @@ require "sinatra"
 require "sinatra/reloader" if development?
 require "pry-byebug"
 require "better_errors"
+require_relative 'cookbook'
+require_relative 'controller'
+
+CSV_FILE = File.join(__dir__, 'recipes.csv')
 
 configure :development do
   use BetterErrors::Middleware
@@ -9,5 +13,12 @@ configure :development do
 end
 
 get "/" do
-  "Hello world!"
+  erb :root
+end
+
+get "/list" do
+  @cookbook = Cookbook.new(CSV_FILE)
+  @controller = Controller.new(cookbook)
+  @controller.list
+  erb :list
 end

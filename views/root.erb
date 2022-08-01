@@ -1,0 +1,33 @@
+<form>
+  <input type="radio" id="list" name="button" value="list" data-href=<%= url("/list") %>>
+  <label for="html">List all recipes</label><br>
+  <!-- The html below needs the urls to be added still -->
+  <input type="radio" id="create" name="button" value="create">
+  <label for="css">Create a new recipe</label><br>
+  <input type="radio" id="destroy" name="button" value="destroy">
+  <label for="javascript">Destroy a recipe</label><br>
+  <input type="radio" id="import" name="button" value="import">
+  <label for="javascript">Import from the internet</label><br>
+  <input type="radio" id="mark_as_done" name="button" value="mark_as_done">
+  <label for="javascript">Mark recipe as done</label><br>
+  <input type="submit" value="Submit" id="btnFormSubmit">
+</form>
+
+<script>
+  var submit = document.getElementById('btnFormSubmit');
+  submit.addEventListener('click', submitForm);
+
+  function submitForm(event){
+    event.preventDefault();
+    event.stopPropagation();
+
+    var href = '',
+    inputs = this.parentNode.getElementsByTagName('input')
+        for(var i=0;i<inputs.length;i++){
+            if(inputs[i].getAttribute('name') == 'button' && inputs[i].checked){
+                href = inputs[i].getAttribute('data-href');
+                window.location = href;
+            }
+        }
+  }
+</script>
